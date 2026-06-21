@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Calcul JIRAMA</title>
+
+<style>
+body{
+    font-family: "Times New Roman", serif;
+    padding:15px;
+    font-size:18px;
+}
+
+input{
+    width:250px;
+    height:35px;
+    font-size:22px;
+}
+
+button{
+    height:40px;
+    font-size:20px;
+}
+
+.result{
+    margin-top:20px;
+    line-height:60px;
+    font-size:28px;
+    font-weight:bold;
+}
+
+.red{
+    color:red;
+}
+</style>
+
+<script>
+function calculer(){
+
+    let p = parseFloat(document.getElementById("prix").value);
+
+    let prix = p + 500;
+
+    let maisons = [
+        {nom:"Tojo", puissance:226},
+        {nom:"Ramiaramila", puissance:210},
+        {nom:"Maman' Isma", puissance:193},
+        {nom:"Trano ampvony", puissance:12}
+    ];
+
+    let somme = 0;
+
+    maisons.forEach(m=>{
+        somme += m.puissance;
+    });
+
+    let rapport = prix / somme;
+
+    let html = "";
+
+    maisons.forEach(m=>{
+
+        let montant = Math.round(
+            m.puissance * rapport
+        );
+
+        html += `
+        <div>
+            ${m.nom} : ${m.puissance} * ${Math.round(rapport)}
+            =
+            <span class="red">${montant} Ar</span>
+        </div>
+        <br>
+        `;
+    });
+
+    document.getElementById("resultat").innerHTML = html;
+}
+</script>
+
+</head>
+<body>
+
+<input
+    type="number"
+    id="prix"
+    placeholder="100000"
+/>
+
+<button onclick="calculer()">
+    validate
+</button>
+
+<div id="resultat" class="result"></div>
+
+</body>
+</html>
